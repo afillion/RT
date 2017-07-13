@@ -14,49 +14,39 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-// static int	expose_hook(t_env *e)
-// {
-// 	int		bpp;
-// 	int		sl;
-// 	int		endian;
-
-// 	e->img = mlx_new_image(e->mlx, e->s->cam->xres, e->s->cam->yres);
-// 	e->addr = mlx_get_data_addr(e->img, &bpp, &sl, &endian);
-// 	ft_drawscene(e->s, e);
-// 	mlx_put_image_to_window(e->mlx, e->win, e->img, 0, 0);
-// 	mlx_destroy_image(e->mlx, e->img);
-// 	return (0);
-// }
-
-// static int	key_hook(int keycode, t_env *e)
-// {
-// 	if (keycode == 53)
-// 		exit(0);
-// 	if (ft_move(keycode, e->s->cam))
-// 	{
-// 		ft_initcam(e->s->cam);
-// 		expose_hook(e);
-// 	}
-// 	return (0);
-// }
+#include <stdio.h>
 
 void		ft_redraw(t_env *e)
 {
 	ft_initcam(e->s->cam);
  	ft_drawscene(e->s, e);
+ 	SDL_SetRenderDrawColor(e->renderer, 0, 0, 0, 255);
+	SDL_RenderClear(e->renderer);
+ 	printf("1\n");
+}
+
+void		rot_cam(SDL_Keycode key, t_env *e)
+{
+	if (key == SDLK_UP && e->event.type == SDL_KEYDOWN)
+		e->s->cam->vec = ft_rotatearound(e->s->cam->vec, e->s->cam->rightvec, (double)(3) / 16);
+	else if (key == SDLK_DOWN && e->event.type == SDL_KEYDOWN)
+		e->s->cam->vec = ft_rotatearound(e->s->cam->vec, e->s->cam->rightvec, (double)(-3) / 16);
+	else if (key == SDLK_RIGHT && e->event.type == SDL_KEYDOWN)
+		e->s->cam->vec = ft_rotatevecteur(e->s->cam->vec, 0, 0, (double)(-3) / 16);
+	else if (key == SDLK_LEFT && e->event.type == SDL_KEYDOWN)
+		e->s->cam->vec = ft_rotatevecteur(e->s->cam->vec, 0, 0, (double)(3) / 16);
 }
 
 void		move_cam(SDL_Keycode key, t_env *e)
 {
 	if (key == SDLK_w && e->event.type == SDL_KEYDOWN)
-	 	e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, 30));
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, 50));
 	else if (key == SDLK_s && e->event.type == SDL_KEYDOWN)
- 	 	e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, -30)); 
- 	 else if (key == SDLK_a && e->event.type == SDL_KEYDOWN)
- 	 	e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, -30));
- 	 else if (key == SDLK_d && e->event.type == SDL_KEYDOWN)
- 	 	e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, 30)); 	 	
- 	 ft_redraw(e);
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, -50)); 
+	else if (key == SDLK_a && e->event.type == SDL_KEYDOWN)
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, -50));
+	else if (key == SDLK_d && e->event.type == SDL_KEYDOWN)
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, 50)); 	 	
 }
 
 void		test(t_env *e)
@@ -65,15 +55,21 @@ void		test(t_env *e)
 	{
 		if (SDL_WaitEvent(&e->event))
 		{
+			printf("2\n");
 			if (e->event.window.event == SDL_WINDOWEVENT_CLOSE || e->event.key.keysym.sym == SDLK_ESCAPE)
 				e->run = 0;
-			move_cam(e->event.key.keysym.sym, e);
-			// if (e->event.key.keysym.sym == SDLK_w && e->event.type == SDL_KEYDOWN)
-			//  {
-			//  	e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, 10));
-			//  	ft_initcam(e->s->cam);
-			//  	ft_drawscene(e->s, e);
-			//  }
+			else if ((KEY == SDLK_w || KEY == SDLK_s || KEY == SDLK_a || KEY == SDLK_d) && e->event.type == SDL_KEYDOWN)
+			{
+				printf("3\n");
+				move_cam(e->event.key.keysym.sym, e);
+				ft_redraw(e);
+		}
+			else if ((KEY == SDLK_UP || KEY == SDLK_DOWN || KEY == SDLK_RIGHT || KEY == SDLK_LEFT) && e->event.type == SDL_KEYDOWN)
+			{
+				printf("3\n");
+				rot_cam(e->event.key.keysym.sym, e);
+				ft_redraw(e);
+			}
 		}
 	}
 }

@@ -27,6 +27,7 @@
 # define DARKGREEN 4805931
 # define GREY 8159104
 # define WHITE 16777215
+# define KEY e->event.key.keysym.sym
 
 typedef struct			s_listobj
 {

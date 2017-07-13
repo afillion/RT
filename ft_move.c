@@ -22,13 +22,13 @@
 // 		cam->pos = ft_translation(cam->pos, ft_multvecteur(cam->rightvec, 10));
 // 	else if (keycode == 91)
 // 		cam->pos = ft_translation(cam->pos, ft_multvecteur(cam->vec, 10));
-// 	else if (keycode == 123)
+// 	else if (keycode == 123) GAUCHE
 // 		cam->vec = ft_rotatevecteur(cam->vec, 0, 0, (double)(1) / 16);
-// 	else if (keycode == 124)
+// 	else if (keycode == 124) DROITE
 // 		cam->vec = ft_rotatevecteur(cam->vec, 0, 0, (double)(-1) / 16);
-// 	else if (keycode == 125)
+// 	else if (keycode == 125) BAS
 // 		cam->vec = ft_rotatearound(cam->vec, cam->rightvec, (double)(-1) / 16);
-// 	else if (keycode == 126)
+// 	else if (keycode == 126) HAUT
 // 		cam->vec = ft_rotatearound(cam->vec, cam->rightvec, (double)(1) / 16);
 // 	else
 // 		return (0);

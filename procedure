@@ -1,0 +1,51 @@
+Les axes choisis sont :
+x = axe horizontal vers le nord
+y = axe horizontal vers l'est
+z = axe vertical vers le haut
+
+Maintest : main version beta dans lequel on donne des valeurs fixes
+en attendant d'avoir un truc qui lit les informations dans un fichier.
+
+On commence par initialiser la camera.
+On donne au programme la position de la camera et son vecteur directeur
+ainsi que la resolution de l'image aui apparaitra a l'ecran
+et la dimension du viewplane.
+
+ft_initcam :
+A partir des donnees entrees dans maintest, on normalise d'abord le
+vecteur directeur et on calcule les donnees de la camera : 
+son vecteur droit (vecteur horizontal perpendiculaire au vecteur directeur)
+et le vecteur haut (perpendiculaire aux deux autres vecteurs).
+On calcule aussi l'ecart entre les positions des points du viewplane
+correspondants aux pixels de l'image, ainsi que la position du premier
+pixel, en haut a gauche. Ainsi, on peut trouver la position de chaque
+point du viewplane correspondants a chaque pixel de l'image (ft_primray).
+
+ft_scene01 :
+Fonction dans laquelle on entre les donnees de chaque objet de la sphere
+en attendant d'avoir un truc qui lit les fichiers.
+
+ft_mlx :
+Fonctions de la minilibx, a changer eventuellement si on utilise un autre
+machin.
+
+ft_move : (bonus)
+Fonction permettant de modifier la position de la camera ainsi que son
+vecteur directeur sans quitter le programme.
+
+ft_drawscene :
+Lance une boucle qui va passer par chaque pixel de l'ecran.
+
+ft_lancerayon :
+Fonction qui va etre appelee pour chaque pixel de l'image, calcule
+le rayon partant de la camera qui traverse un point de la viewplane
+correspondant a un pixel donne (en utilisant ft_primray).
+Calcule les intersections entre ce rayon et chaque objet de la scene
+et prend la couleur de l'objet le plus proche, puis transmet cette couleur
+sur un pixel de l'image.
+
+ft_intersect :
+Appelle differentes fonctions en fonction des different type d'objet de la
+scene. Ces fonctions calculent la distance entre la camera et l'objet,
+et modifient la couleur ray->color et la distance ray->t si cet objet est 
+le plus proche de la camera.

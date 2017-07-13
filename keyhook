@@ -1,0 +1,14 @@
+1 = 83
+2 = 84		Deplace la camera vers l'arriere (relatif a cam->vec)
+3 = 85
+4 = 86		Deplace la camera vers la gauche (relatif a cam->rightvec)
+5 = 87
+6 = 88		Deplace la camera vers la droite (relatif a cam->rightvec)
+7 = 89
+8 = 91		Deplace la camera vers l'avant (relatif a cam->vec)
+9 = 92
+
+Gauche = 123
+Droite = 124
+Bas = 125
+Haut = 126

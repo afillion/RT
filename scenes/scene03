@@ -65,6 +65,7 @@ y:50
 z:60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:50
@@ -72,6 +73,7 @@ y:50
 z:-60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:50
@@ -79,6 +81,7 @@ y:-50
 z:60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:50
@@ -86,6 +89,7 @@ y:-50
 z:-60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:-50
@@ -93,6 +97,7 @@ y:50
 z:60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:-50
@@ -100,6 +105,7 @@ y:50
 z:-60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:-50
@@ -107,6 +113,7 @@ y:-50
 z:60
 r:15
 color:GREY
+texture:1
 
 SPHERE
 x:-50
@@ -114,6 +121,7 @@ y:-50
 z:-60
 r:-15
 color:GREY
+texture:1
 
 CYLINDRE
 x:50
@@ -134,3 +142,4 @@ CYLINDRE
 x:-50
 y:-50
 color:GREY
+texture:1

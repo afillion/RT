@@ -6,7 +6,7 @@
 /*   By: ltesson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/04/19 13:12:12 by ltesson           #+#    #+#             */
-/*   Updated: 2017/06/22 10:38:11 by ltesson          ###   ########.fr       */
+/*   Updated: 2017/08/29 22:35:04 by afillion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,18 @@
 # define GREY 8159104
 # define WHITE 16777215
 # define KEY e->event.key.keysym.sym
+
+#if SDL_BYTEORDER == SDL_BIG_ENDIAN
+#define	rmask 0xFF000000
+#define	gmask 0x00FF0000
+#define	bmask 0x0000FF00
+#define amask 0x000000FF
+#else
+#define rmask 0x000000FF
+#define gmask 0x0000FF00
+#define bmask 0x00FF0000
+#define amask 0xFF000000
+#endif
 
 typedef struct			s_listobj
 {
@@ -82,6 +94,7 @@ typedef struct			s_sphere
 	t_point				pos;
 	double				r;
 	int					color;
+	int 				texture;
 }						t_sphere;
 
 typedef struct			s_plan
@@ -100,6 +113,7 @@ typedef struct			s_cylindre
 	double				b;
 	double				r;
 	int					color;
+	int 				texture;
 }						t_cylindre;
 
 typedef struct			s_cone
@@ -138,6 +152,9 @@ typedef struct			s_env
 	SDL_Event			event;
 	int 				run;
 	t_scene				*s;
+	SDL_Surface			*vegeta;
+	SDL_Surface			*redbrick;
+	SDL_Surface			*earth;
 }						t_env;
 
 void					ft_readfile(t_scene *s, char *av);
@@ -171,11 +188,11 @@ int						ft_intercheck(t_rayon *ray, t_scene *s);
 int						ft_distance(double a, double b, double c, t_rayon *ray);
 int						ft_error(int e);
 void					ft_addsphere(t_scene *s, t_point pos, double r,
-						int color);
+						int color, int texture);
 void					ft_addplan(t_scene *s, t_point pos, double r,
 						int color);
 void					ft_addcylindre(t_scene *s, t_point pos, t_point t,
-						int color);
+						int color, int texture);
 void					ft_addcone(t_scene *s, t_point pos, t_point t,
 						int color);
 void					ft_addlist(t_scene *s, void *objet, int type);
@@ -186,5 +203,6 @@ t_vecteur				ft_getnormcyl(t_point pos, t_cylindre *cylindre);
 t_vecteur				ft_getnormcone(t_point pos, t_cone *cone);
 void					ft_getlight(t_scene *s, t_rayon *ray);
 int						ft_move(int keycode, t_camera *cam);
+void					ft_init_texture(t_env *e);
 
 #endif

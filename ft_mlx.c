@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+	/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_mlx.c                                           :+:      :+:    :+:   */
@@ -6,15 +6,16 @@
 /*   By: ltesson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/05/09 17:43:10 by ltesson           #+#    #+#             */
-/*   Updated: 2017/06/22 10:52:02 by ltesson          ###   ########.fr       */
+/*   Updated: 2017/08/29 22:45:51 by afillion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include <stdlib.h>
 #include <unistd.h>
-
+/* a enlever */
 #include <stdio.h>
+/* ********** */
 
 void		ft_redraw(t_env *e)
 {
@@ -42,11 +43,11 @@ void		move_cam(SDL_Keycode key, t_env *e)
 	if (key == SDLK_w && e->event.type == SDL_KEYDOWN)
 		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, 50));
 	else if (key == SDLK_s && e->event.type == SDL_KEYDOWN)
-		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, -50)); 
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->vec, -50));
 	else if (key == SDLK_a && e->event.type == SDL_KEYDOWN)
 		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, -50));
 	else if (key == SDLK_d && e->event.type == SDL_KEYDOWN)
-		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, 50)); 	 	
+		e->s->cam->pos = ft_translation(e->s->cam->pos, ft_multvecteur(e->s->cam->rightvec, 50));
 }
 
 void		test(t_env *e)
@@ -77,6 +78,8 @@ void		test(t_env *e)
 void		ft_sdl(t_scene *s)
 {
 	t_env	*e;
+//	 int		x = 0;
+//	 int		y = 0;
 
 	e = (t_env*)malloc(sizeof(t_env));
 	e->s = s;
@@ -94,6 +97,38 @@ void		ft_sdl(t_scene *s)
 	SDL_SetRenderDrawColor(e->renderer, 0, 0, 0, 255);
 	SDL_RenderClear(e->renderer);
 	e->run = 1;
-	ft_drawscene(e->s, e);
+//	ft_drawscene(e->s, e);
+	ft_init_texture(e);
+//	SDL_Surface *image = SDL_LoadBMP("./VegetaFF.bmp");
+//	if (image == NULL)
+//		printf("image == NULL\n");
+//	int nb_bytes_per_pixel = image->format->BytesPerPixel;
+//	Uint32 format = image->format->format;
+//	printf("SDL_GetPixelFormatName: %s\n", SDL_GetPixelFormatName(format));
+//	printf("image->format->BytesPerPixel = %d\n", nb_bytes_per_pixel);
+//	printf("image->format->format : %d\n", image->format->format);
+//	printf("rgbq888: %d\n", SDL_PIXELFORMAT_RGBA8888);
+//	 while (x < image->w)
+//	 {
+//	 	y = 0;
+//	 	while (y < image->h)
+//	 	{
+//	 		Uint8 *p = (Uint8*)image->pixels + y * image->pitch + x * nb_bytes_per_pixel;
+//			 Uint32 pixel = p[0] << 16 | p[1] << 8 | p[2];
+//			 if (pixel != 16777215)
+//			 {
+//			 	printf("pixel = %d\n", (int)pixel);
+//			 	printf("p[0] << 16 = %d\tp[1] << 8 = %d\tp[2] = %d\n", p[0], p[1], p[2]);
+//			 }
+//	 		y++;
+//	 	}
+//	 	x++;
+//	 }
+//	SDL_Texture *texture = SDL_CreateTextureFromSurface(e->renderer, image);
+//	if (texture == NULL)
+//		printf("texture = NULL\n");
+//	SDL_FreeSurface(image);
+//	SDL_RenderCopy(e->renderer, texture, NULL, NULL);
+//	SDL_RenderPresent(e->renderer);
 	test(e);
 }

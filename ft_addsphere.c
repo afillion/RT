@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <stdlib.h>
 
-void	ft_addsphere(t_scene *s, t_point pos, double r, int color)
+void	ft_addsphere(t_scene *s, t_point pos, double r, int color, int texture)
 {
 	t_sphere	*sphere;
 	t_listobj	*newobj;
@@ -28,6 +28,7 @@ void	ft_addsphere(t_scene *s, t_point pos, double r, int color)
 	sphere->pos = pos;
 	sphere->r = r;
 	sphere->color = color;
+	sphere->texture = texture;
 	newobj->objet = sphere;
 	newobj->type = SPHERE;
 	newobj->next = s->list;

@@ -6,7 +6,7 @@
 #    By: ltesson <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/12/02 15:46:25 by ltesson           #+#    #+#              #
-#    Updated: 2017/06/17 19:30:31 by ltesson          ###   ########.fr        #
+#    Updated: 2017/08/29 22:35:31 by afillion         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ SRC = main.c ft_initcam.c ft_vecteur.c ft_mlx.c ft_drawscene.c \
 	  ft_addspot.c ft_intercheck.c ft_distance.c ft_readfile.c \
 	  ft_readspot.c ft_readsphere.c ft_readplan.c ft_readcylindre.c \
 	  ft_readcone.c ft_addlist.c ft_readcolor.c ft_readcamera.c \
-	  ft_initscene.c
+	  ft_initscene.c ft_texture.c
 
 OBJ= $(SRC:.c=.o)
 

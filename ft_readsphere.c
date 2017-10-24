@@ -6,7 +6,7 @@
 /*   By: ltesson <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/06/13 18:16:43 by ltesson           #+#    #+#             */
-/*   Updated: 2017/06/15 17:21:47 by ltesson          ###   ########.fr       */
+/*   Updated: 2017/08/29 16:46:45 by afillion         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	ft_spheredata(t_sphere *sphere, char *line)
 			sphere->r = ft_atof(split[1]);
 		if (ft_strcasecmp("color", split[0]) == 0)
 			sphere->color = ft_readcolor(split[1]);
+		if (ft_strcasecmp("texture", split[0]) == 0)
+			sphere->texture = ft_atoi(split[1]);
 	}
 	ft_freesplit(split);
 }
@@ -50,6 +52,7 @@ void	ft_readsphere(t_scene *s, int fd, char *line, int *i)
 	sphere->pos.z = 0;
 	sphere->r = 10;
 	sphere->color = WHITE;
+	sphere->texture = 0;
 	while (ft_strlen(line) && *i == 1)
 	{
 		*i = get_next_line(fd, &line);

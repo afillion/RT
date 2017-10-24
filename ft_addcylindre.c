@@ -13,7 +13,7 @@
 #include "rt.h"
 #include <stdlib.h>
 
-void	ft_addcylindre(t_scene *s, t_point pos, t_point t, int color)
+void	ft_addcylindre(t_scene *s, t_point pos, t_point t, int color, int texture)
 {
 	t_cylindre	*cylindre;
 	t_listobj	*newobj;
@@ -30,6 +30,7 @@ void	ft_addcylindre(t_scene *s, t_point pos, t_point t, int color)
 	cylindre->b = t.y;
 	cylindre->r = t.z;
 	cylindre->color = color;
+	cylindre->texture = texture;
 	newobj->objet = cylindre;
 	newobj->type = CYLINDRE;
 	newobj->next = s->list;

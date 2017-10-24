@@ -37,6 +37,8 @@ void	ft_cylindredata(t_cylindre *cylindre, char *line)
 			cylindre->r = ft_atof(split[1]);
 		if (ft_strcasecmp("color", split[0]) == 0)
 			cylindre->color = ft_readcolor(split[1]);
+		if (ft_strcasecmp("texture", split[0]) == 0)
+			cylindre->texture = ft_atoi(split[1]);
 	}
 	ft_freesplit(split);
 }

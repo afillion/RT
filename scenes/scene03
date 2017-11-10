@@ -58,6 +58,7 @@ r:5
 a:-1
 b:0.5
 color:GREEN
+texture:1
 
 SPHERE
 x:50

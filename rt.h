@@ -28,6 +28,7 @@
 # define GREY 8159104
 # define WHITE 16777215
 # define KEY e->event.key.keysym.sym
+# define ABS(n) ((n) < 0 ? -(n) : (n))
 
 #if SDL_BYTEORDER == SDL_BIG_ENDIAN
 #define	rmask 0xFF000000

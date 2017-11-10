@@ -95,8 +95,13 @@ void	ft_lancerayon(t_scene *s, t_env *e, int i, int j)
 			n = ft_normalizevecteur(n);
 //			u = 1 - (0.5 + ((atan2(n.x, n.z)) / (2 * M_PI)));
 //			v = 1 - (0.5 - ((asin(n.y)) / M_PI));
+
 			u = atan2(n.x, n.z) / (2 * M_PI) + 0.5;
 			v = n.y * 0.5 + 0.5;
+
+			// v = 0.5 + (atan2(n.z, n.x) / (2 * M_PI));
+			// u = 0.5 - (asin(n.y / ((t_sphere*)ray.objet->objet)->r) / M_PI);
+
 			// SDL_Surface *image = SDL_LoadBMP("./VegetaFF.bmp");
 			// u  = asin(n.x / ((t_sphere*)ray.objet->objet)->r);
 			// printf("pi.x = %f rayon = %f\n", n.x, ((t_sphere*)ray.objet->objet)->r);
@@ -123,13 +128,16 @@ void	ft_lancerayon(t_scene *s, t_env *e, int i, int j)
 			// printf("%f\n", test);
 			// int l = (int)(image->w * (test - (int)test));
 			// printf("{%d ; %d}\n", k, l);
-			// SDL_Surface *image = SDL_LoadBMP("./VegetaFF.bmp");
+
+			// SDL_Surface *image = SDL_LoadBMP("./redbrick.bmp");
+
 			// printf("Intersection point p{%fx ; %fy ; %fz} in cartesian coordinate system\n", pi.x, pi.y, pi.z);
 		 	// double radius = sqrt(pi.x * pi.x + pi.y * pi.y + pi.z * pi.z);
 			// double theta = atan2(pi.y, pi.x);
 			// double phi = atan2(sqrt(pi.x * pi.x + pi.y * pi.y), pi.z);
 			// printf("Intersection point p{%fr ; %ftheta ; %fphi} in spherical coordiante system\n", radius, theta, phi);
 			// printf("UV = {%f ; %f} | ST = {%f ; %f}\n", u, v, s, t);
+
 			// int bpp = image->format->BytesPerPixel;
 
 			 int r = ((((int)(u * 100) ^ ((int)(v * 100))) >> 2)&1);
@@ -146,7 +154,6 @@ void	ft_lancerayon(t_scene *s, t_env *e, int i, int j)
 			// ray.color = p[0] | p[1] << 8 | p[2] << 16;
 			// printf("ray.color = %d\n", ray.color);
 			// SDL_FreeSurface(image);
-
 		}
 		else
 			ray.color = ((t_sphere*)ray.objet->objet)->color;
@@ -176,9 +183,12 @@ void	ft_lancerayon(t_scene *s, t_env *e, int i, int j)
 			pos.z = pi.z;
 			n = ft_getnormcyl(pos, ((t_cylindre*)ray.objet->objet));
 
-			r = sqrt((n.x * n.x) + (n.y * n.y));
-			theta = atan2(n.x, n.z);
-			z = n.y;
+			// r = sqrt((n.x * n.x) + (n.y * n.y));
+			// theta = atan2(n.x, n.z);
+			// z = n.y;
+			// theta = atan2(n.y, n.x);
+			// u = (theta / (2 * M_PI));
+			// v = n.z / ((t_cylindre*)ray.objet->objet)->
 
 			// printf("Intersection point p{%fx ; %fy ; %fz} in cartesian coordinate system\n", pi.x, pi.y, pi.z);
 			// printf("Intersection point p{%fr ; %ftheta ; %fz} in cylindrical coordinate system\n", r, theta, z);
@@ -187,10 +197,30 @@ void	ft_lancerayon(t_scene *s, t_env *e, int i, int j)
 			u = -(0.5 + (atan2(n.x, n.y) / M_PI));
 			v = -(n.z / M_PI) - floor(n.z / M_PI);
 			int t = ((((int)(u * 100) ^ ((int)(v * 100))) >> 2)&1);
-			if (t == 0)
-				ray.color = 0xFF0000;
+
+			t_vecteur test;
+			test.x = (pos.x - ((t_cylindre*)ray.objet->objet)->r) - ((t_cylindre*)ray.objet->objet)->pos.x;
+			test.y = (pos.y - ((t_cylindre*)ray.objet->objet)->r) - ((t_cylindre*)ray.objet->objet)->pos.y;
+			test.z = (pos.z - ((t_cylindre*)ray.objet->objet)->r) - ((t_cylindre*)ray.objet->objet)->pos.z;
+
+			double c_pythagore = sqrt((test.x*test.x)+(test.y*test.y)+(test.z*test.z));
+			double b_pythagore = (((t_cylindre*)ray.objet->objet)->r * ((t_cylindre*)ray.objet->objet)->r) - (c_pythagore * c_pythagore);
+			b_pythagore = sqrt(b_pythagore);
+			printf("%f\n", (b_pythagore));
+			if (t == 0 && (int)(b_pythagore + 200000) % 10 >= 5)
+				ray.color = 0x0000ff;
+			else if (t != 0 && (int)(b_pythagore + 200000) % 10 < 5)
+				ray.color = 0x0000ff;
 			else
-				ray.color = 0xFF;
+				ray.color = 0xff;
+
+			// if (t == 0 && (int)(pi.z + 20000000) % 10 >= 5)
+			// 	ray.color = 0xFF0000;
+			// else if (t != 0 && (int)(pi.z + 20000000) % 10 < 5)
+			// 	ray.color = 0xFF0000;
+			// else
+			// 	ray.color = 0xFF; // == 0x0000FF; Pas besoin de marquer les deux premiers bytes quand ils sont nuls
+
 			// x = (r * cos(theta));
 			// y = (r * sin(theta));
 
